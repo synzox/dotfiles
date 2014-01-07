@@ -122,10 +122,17 @@ function install_powerline_precmd() {
   done
   precmd_functions+=(powerline_precmd)
 }
-
 install_powerline_precmd
 
+#powerline
+#POWERLINE_COMMAND=$HOME/.vim/bundle/powerline/scripts/powerline; export POWERLINE_COMMAND
 #source $HOME/.vim/bundle/powerline/powerline/bindings/zsh/powerline.zsh
+export TERM=xterm-256color
 
 #fasd
 eval "$(fasd --init auto posix-alias zsh-hook zsh-ccomp zsh-wcomp)"
+
+#tmux-powerline
+PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
+
+
