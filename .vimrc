@@ -5,6 +5,7 @@ set nocompatible
 syntax on
 " 设置Vim内部使用的字符编码
 set encoding=utf-8
+scriptencoding utf-8
 " 设置Vim用于屏幕显示的编码
 set termencoding=utf-8
 " 使用中文菜单，并使用 UTF-8 编码
@@ -67,7 +68,7 @@ set smartindent
 set foldmethod=syntax
 " 如果前面启用了代码折叠，那么文件一打开代码全部是折叠的，需再按“zO”打开全部折叠的代码
 " 如果想在文件打开后所有折叠都自动展开，请加入以下配置
-set foldlevelstart=9999
+"set foldlevelstart=9999
 "设置代码折叠符号（行号左侧）
 set foldcolumn=4
 " 打开文件时，按照 viminfo 保存的上次关闭时的光标位置重新设置光标
@@ -109,7 +110,7 @@ set tags+=tags
 " 显示tab和空格
 set list
 " 设置tab和空格样式
-set listchars=tab:\|\ ,nbsp:%,precedes:<,extends:>,trail:-
+set listchars=tab:\|\ ,nbsp:%,precedes:<,extends:>,trail:~
 " 设定行首tab为灰色
 "highlight LeaderTab ctermfg=247 guifg=#a73111 cterm=bold gui=bold
 highlight NoneText ctermfg=247 guifg=#a73111 cterm=bold gui=bold
@@ -167,7 +168,7 @@ nmap <silent><C-F12> :execute "cd" expand("%:h")<CR>
 
 " " 插件设置
 """"""""""""""""""""""""""""""
-" " vundle setting
+" " vundle settings
 """"""""""""""""""""""""""""""
 set nocompatible               " be iMproved
 filetype off                   " required!
@@ -241,13 +242,14 @@ Bundle 'genutils'
 Bundle 'indentLine.vim'
 Bundle 'Mark'
 Bundle 'mru.vim'
-Bundle 'neocomplcache'
+"Bundle 'neocomplcache'
+Bundle 'Shougo/neocomplete.vim'
 Bundle 'The-NERD-Commenter'
 Bundle 'The-NERD-tree'
 Bundle 'LargeFile'
 "Bundle 'loadtags'
-"Bundle 'Lokaltog/vim-powerline'
-Bundle 'Lokaltog/powerline'
+Bundle 'Lokaltog/vim-powerline'
+"Bundle 'Lokaltog/powerline'
 Bundle 'project.tar.gz'
 Bundle 'repeat.vim'
 Bundle 'restart.vim'
@@ -271,7 +273,7 @@ Bundle 'winmanager'
 Bundle 'ZenCoding.vim'
 
 " game
-Bundle 'uguu-org/vim-matrix-screensaver' 
+Bundle 'uguu-org/vim-matrix-screensaver'
 
 filetype plugin indent on     " required!
 "
@@ -283,9 +285,10 @@ filetype plugin indent on     " required!
 "
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle command are not allowed..
-" " vundle setting ends
+" " vundle settings end
 
-set ffs=unix
+" " 设置文件格式为unix
+set fileformats=unix
 " " 图形界面下的设置
 if (has("gui_running"))
     " 设置不折行
@@ -306,7 +309,7 @@ endif
 
 
 """"""""""""""""""""""""""""""
-" " ack setting
+" " ack settings
 """"""""""""""""""""""""""""""
 " ack替代grep
 set grepprg=ack-grep
@@ -314,11 +317,11 @@ set grepprg=ack-grep
 "map <C-F11> "zyw:exe "Ack ".@z." "<CR>
 " 默认目录/home/synzox/Workspace
 map <C-F11> "zyw:exe "Ack ".@z." /home/synzox/Workspace"<CR>
-" " ack setting ends
+" " ack settings end
 
 
 """"""""""""""""""""""""""""""
-" " ConqueTerm setting
+" " ConqueTerm settings
 """"""""""""""""""""""""""""""
 " 选中的文本发送至ConqueTerm
 let g:ConqueTerm_SendVisKey = '<F9>'
@@ -328,21 +331,21 @@ let g:ConqueTerm_Color = 0
 if (has("win64"))
     let g:ConqueTerm_PyExe = 'D:\Program Files\Python33\python.exe'"
 endif
-" " ConqueTerm setting ends
+" " ConqueTerm settings end
 
 
 """"""""""""""""""""""""""""""
-" " engspchk setting
+" " engspchk settings
 """"""""""""""""""""""""""""""
 set mouse=a
 let g:spchkmouse   = 1
 let g:spchkautonext= 1
 let g:spchkdialect = "usa"
-" " engspchk setting ends
+" " engspchk settings end
 
 
 """"""""""""""""""""""""""""""
-" " FuzzyFinder setting
+" " FuzzyFinder settings
 """"""""""""""""""""""""""""
 "let g:fuf_modesDisable = [ 'mrufile', 'mrucmd', ]
 let g:fuf_modesDisable = []
@@ -446,21 +449,21 @@ let g:fuf_com_list=[':exe "FufBuffer                       " |" sj     ',
 
 nnoremap <silent> <C-F5> :call fuf#givencmd#launch('', 0, '选择命令>', GetAllCommands())<CR>
 nnoremap <silent> <F5> :call fuf#givencmd#launch('', 0, '选择命令>', g:fuf_com_list)<CR>
-"" FuzzyFinder setting ends
+"" FuzzyFinder settings end
 
 
 """"""""""""""""""""""""""""""
-" " indentLine setting
+" " indentLine settings
 """"""""""""""""""""""""""""""
 let g:indentLine_color_term = 209
 "let g:indentLine_color_gui = '#A4E57E'
 "let g:indentLine_color_gui = '#DFBBFF'
 let g:indentLine_color_gui = '#999999'
-" " indentLine setting ends
+" " indentLine settings end
 
 
 """"""""""""""""""""""""""""""
-" " vim-latex setting
+" " vim-latex settings
 """"""""""""""""""""""""""""""
 let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_CompileRule_pdf = 'xelatex --src-specials -synctex=1 $*'
@@ -469,10 +472,10 @@ let g:Tex_ViewRule_pdf = 'mupdf'
 "let g:Tex_ViewRule_ps = 'evince'
 "let g:Tex_ViewRule_dvi = 'evince'
 "let execString = 'silent! !evince --unique '.mainfnameRoot.'.pdf\=src:'.line('.').expand("%")
-" " vim-latex setting ends
+" " vim-latex settings end
 
 """"""""""""""""""""""""""""""
-" " lookupfile setting
+" " lookupfile settings
 """"""""""""""""""""""""""""""
 let g:LookupFile_MinPatLength = 2               "最少输入2个字符才开始查找
 let g:LookupFile_PreserveLastPattern = 0        "不保存上次查找的字符串
@@ -488,100 +491,190 @@ nmap <silent> <leader>lk :LUTags<cr>
 nmap <silent> <leader>ll :LUBufs<cr>
 " 搜索目录
 nmap <silent> <leader>lw :LUWalk<cr>
-" " lookupfile setting ends
+" " lookupfile settings end
 
 
 """"""""""""""""""""""""""""""
-" " markdown setting
+" " markdown settings
 """"""""""""""""""""""""""""""
 let g:vim_markdown_folding_disabled=1
-" " markdown setting ends 
+" " markdown settings end
+
+"""""""""""""""""""""""""""""""
+"" " neocomplcache settings
+"""""""""""""""""""""""""""""""
+"" 开启VIM后自动使用NeoComplete
+"let g:neocomplcache_enable_at_startup = 1
+"" 切换neocomplcache状态
+"nmap <C-F2> :NeoComplCacheToggle<CR>
+"" Use smartcase.
+"let g:neocomplcache_enable_smart_case = 1
+"" Set minimum syntax keyword length.
+"let g:neocomplcache_min_syntax_length = 3
+"let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+"" Enable heavy features.
+"" Use camel case completion.
+"let g:neocomplcache_enable_camel_case_completion = 1
+"" Use underbar completion.
+"let g:neocomplcache_enable_underbar_completion = 1
+
+
+"let g:neocomplcache_max_list = 1000000
+
+"" Define dictionary.
+"let g:neocomplcache_dictionary_filetype_lists = {
+    "\ 'default' : '',
+    "\ 'vimshell' : $HOME.'/.vimshell_hist',
+    "\ 'scheme' : $HOME.'/.gosh_completions'
+        "\ }
+"if !exists('g:neocomplcache_same_filetype_lists')
+  "let g:neocomplcache_same_filetype_lists = {}
+"endif
+"let g:neocomplcache_same_filetype_lists.tex = 'txt'
+"" In c buffers, completes from cpp and d buffers.
+"let g:neocomplcache_same_filetype_lists.c = 'cpp,d'
+"" In cpp buffers, completes from c buffers.
+"let g:neocomplcache_same_filetype_lists.cpp = 'c'
+"" In gitconfig buffers, completes from all buffers.
+"let g:neocomplcache_same_filetype_lists.gitconfig = '_'
+"" In default, completes from all buffers.
+"let g:neocomplcache_same_filetype_lists._ = '_'
+
+"" Define keyword.
+"if !exists('g:neocomplcache_keyword_patterns')
+    "let g:neocomplcache_keyword_patterns = {}
+"endif
+"let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
+"" Plugin key-mappings.
+"inoremap <expr><C-g>     neocomplcache#undo_completion()
+"inoremap <expr><C-l>     neocomplcache#complete_common_string()
+    
+"" Recommended key-mappings.
+"" <CR>: close popup and save indent.
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"function! s:my_cr_function()
+  "return neocomplcache#smart_close_popup() . "\<CR>"
+  "" For no inserting <CR> key.
+  ""return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+"endfunction
+"" <TAB>: completion.
+""inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+""inoremap <expr><Enter>  pumvisible() ? "\<C-Y>" : "\<Enter>"
+"" <C-h>, <BS>: close popup and delete backword char.
+"inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+"inoremap <expr><C-y>  neocomplcache#close_popup()
+"inoremap <expr><C-e>  neocomplcache#cancel_popup()
+""Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
+
+"" For cursor moving in insert mode(Not recommended)
+""inoremap <expr><Left>  neocomplcache#close_popup() . "\<Left>"
+""inoremap <expr><Right> neocomplcache#close_popup() . "\<Right>"
+""inoremap <expr><Up>    neocomplcache#close_popup() . "\<Up>"
+""inoremap <expr><Down>  neocomplcache#close_popup() . "\<Down>"
+"" Or set this.
+""let g:neocomplcache_enable_cursor_hold_i = 1
+"" Or set this.
+""let g:neocomplcache_enable_insert_char_pre = 1
+
+"" " neocomplcache settings end
+
 
 """"""""""""""""""""""""""""""
-" " neocomplcache setting
+" " neocomplete settings
 """"""""""""""""""""""""""""""
-" 开启VIM后自动使用NeoComplete
-let g:neocomplcache_enable_at_startup = 1
-" 切换neocomplcache状态
-nmap <C-F2> :NeoComplCacheToggle<CR>
+" 切换neocomplete状态
+nmap <C-F2> :NeoCompleteToggle<CR>
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
+let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-
-" Enable heavy features.
-" Use camel case completion.
-let g:neocomplcache_enable_camel_case_completion = 1
-" Use underbar completion.
-let g:neocomplcache_enable_underbar_completion = 1
-
-
-let g:neocomplcache_max_list = 1000000
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
 " Define dictionary.
-let g:neocomplcache_dictionary_filetype_lists = {
+let g:neocomplete#sources#dictionary#dictionaries = {
     \ 'default' : '',
     \ 'vimshell' : $HOME.'/.vimshell_hist',
     \ 'scheme' : $HOME.'/.gosh_completions'
         \ }
-if !exists('g:neocomplcache_same_filetype_lists')
-  let g:neocomplcache_same_filetype_lists = {}
-endif
-let g:neocomplcache_same_filetype_lists.tex = 'txt'
-" In c buffers, completes from cpp and d buffers.
-let g:neocomplcache_same_filetype_lists.c = 'cpp,d'
-" In cpp buffers, completes from c buffers.
-let g:neocomplcache_same_filetype_lists.cpp = 'c'
-" In gitconfig buffers, completes from all buffers.
-let g:neocomplcache_same_filetype_lists.gitconfig = '_'
-" In default, completes from all buffers.
-let g:neocomplcache_same_filetype_lists._ = '_'
 
 " Define keyword.
-if !exists('g:neocomplcache_keyword_patterns')
-    let g:neocomplcache_keyword_patterns = {}
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
 endif
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " Plugin key-mappings.
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
-    
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-  return neocomplcache#smart_close_popup() . "\<CR>"
+  return neocomplete#close_popup() . "\<CR>"
   " For no inserting <CR> key.
-  "return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 " <TAB>: completion.
 "inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-"inoremap <expr><Enter>  pumvisible() ? "\<C-Y>" : "\<Enter>"
 " <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
-"Close popup by <Space>.
-inoremap <expr><Space> pumvisible() ? neocomplcache#close_popup() : "\<Space>"
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+" Close popup by <Space>.
+inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
 " For cursor moving in insert mode(Not recommended)
-"inoremap <expr><Left>  neocomplcache#close_popup() . "\<Left>"
-"inoremap <expr><Right> neocomplcache#close_popup() . "\<Right>"
-"inoremap <expr><Up>    neocomplcache#close_popup() . "\<Up>"
-"inoremap <expr><Down>  neocomplcache#close_popup() . "\<Down>"
+"inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
+"inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
+"inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
+"inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
 " Or set this.
-"let g:neocomplcache_enable_cursor_hold_i = 1
+"let g:neocomplete#enable_cursor_hold_i = 1
 " Or set this.
-"let g:neocomplcache_enable_insert_char_pre = 1
+"let g:neocomplete#enable_insert_char_pre = 1
 
-" " neocomplcache setting ends
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+" " neocomplete settings end
 
 
 """"""""""""""""""""""""""""""
-" " NERDtree setting
+" " NERDtree settings
 """"""""""""""""""""""""""""""
 " F4打开NERDtree
 nmap <silent> <F4> :NERDTreeToggle<cr>
@@ -593,18 +686,18 @@ let NERDTreeWinSize=32
 let NERDTreeWinPos="right"
 " 显示隐藏文件
 let NERDTreeShowHidden=1
-" " NERDtree setting ends
+" " NERDtree settings end
 
 
 """"""""""""""""""""""""""""""
-" " ultisnips setting
+" " ultisnips settings
 """"""""""""""""""""""""""""""
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
-" " ultisnips setting ends
+" " ultisnips settings end
 
 
 """"""""""""""""""""""""""""""
-" " taglist setting
+" " taglist settings
 """"""""""""""""""""""""""""""
 " F6打开taglist
 nnoremap <silent> <F6> :TlistToggle<CR>
@@ -616,11 +709,11 @@ let Tlist_WinWidth=32
 let Tlist_File_Fold_Auto_Close = 1
 " 只有taglist窗口时自动退出
 let Tlist_Exit_OnlyWindow = 1
-" " taglist setting ends
+" " taglist settings end
 
 
 """"""""""""""""""""""""""""""
-" " winManager setting
+" " winManager settings
 """"""""""""""""""""""""""""""
 " 左上NERDtree窗口，左下taglist窗口
 let g:NERDTree_title="[NERDTree]"
@@ -648,11 +741,11 @@ let g:Tlist_WinHeight = 50
 nmap <C-W><C-F> :FirstExplorerWindow<cr>
 " 跳转至左下窗口
 nmap <C-W><C-B> :BottomExplorerWindow<cr>
-" " winmanager setting ends
+" " winmanager settings end
 
 
 """"""""""""""""""""""""""""""""
-"" miniBufExpl setting
+"" miniBufExpl settings
 """"""""""""""""""""""""""""""""
 "let g:miniBufExplMapWindowNavVim = 1 "Ctrl-<hjkl> to move to window
 "let g:miniBufExplTabWrap = 1 " make tabs show complete (no broken on two lines)
@@ -662,9 +755,9 @@ nmap <C-W><C-B> :BottomExplorerWindow<cr>
 "let g:miniBufExplorerMoreThanOne = 0
 
 """""""""""""""""""""""""""""""""""""
-" powerline setting
+" powerline settings
 """""""""""""""""""""""""""""""""""""
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 set fillchars+=stl:\ ,stlnc:\
 set ambiwidth=single
 set laststatus=2   " Always show the statusline
@@ -681,11 +774,11 @@ if ! has('gui_running')
         au InsertLeave * set timeoutlen=1000
     augroup END
 endif
-" " powerline setting ends
+" " powerline settings end
 
 
 """""""""""""""""""""""""""""""""""""
-" project setting
+" project settings
 """""""""""""""""""""""""""""""""""""
 "切换打开和关闭project窗口
 ""nmap <silent> <Leader>P <Plug>ToggleProject
@@ -708,19 +801,19 @@ let g:proj_flags='T'    "子项目的折叠在更新时会紧跟在当前折叠�
 ""let g:proj_flags='v'    " 设置后将, 按 \G 搜索时用 :vimgrep 取代 :grep.
 ""let g:proj_run1='!p4 edit %f'    "g:proj_run1 ...  g:proj_run9 用法.
 "let g:proj_run3='silent !gvim %f
-" " project setting ends
+" " project settings end
 
 
 """""""""""""""""""""""""""""""""""""
-" " voom setting
+" " voom settings
 """""""""""""""""""""""""""""""""""""
 " F7打开VOoM
 nmap <F7> :VoomToggle<CR>
-" " voom setting ends
+" " voom settings end
 
 
 """""""""""""""""""""""""""""""""""""
-" " cscope setting
+" " cscope settings
 """""""""""""""""""""""""""""""""""""
 " This tests to see if vim was configured with the '--enable-cscope' option
 " when it was compiled.  If it wasn't, time to recompile vim...
@@ -857,7 +950,7 @@ nmap <C-@><C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
 "
 "set ttimeoutlen=100
 
-" " cscope setting ends
+" " cscope settings end
 
 
 " 功能键汇总
