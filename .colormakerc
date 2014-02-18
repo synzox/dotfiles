@@ -18,11 +18,11 @@ $col_blink =        "\033[05m";
 #
 $col_default =      $col_ltgray;
 $col_gcc =          $col_magenta . $col_brighten;
-$col_make =         $col_cyan;
+$col_make =         $col_blue . $col_brighten;
 $col_filename =     $col_green;
 $col_linenum =      $col_cyan . $col_brighten ;
-$col_trace =        $col_blue . $col_brighten;
-$col_warning =      $col_yellow;
+$col_trace =        $col_yellow ;
+$col_warning =      $col_yellow . $col_brighten;
 $col_comment =      $col_drkgray;
 $tag_error =        "";
 $col_error =        $tag_error . $col_red . $col_brighten;
